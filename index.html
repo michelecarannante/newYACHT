@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Grid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --height: 80vh;
+      --half-height: calc(var(--height) / 2);
+      --transition: all 1s;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Bitter", serif;
+      margin: 20px 0;
+      padding: 0 15px;
+      background: #cae9ff;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .notification {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      font-size: 0.85em;
+      background: #e9c46a;
+    }
+
+    .grid,
+    .sub-grid,
+    .grid .card {
+      transition: var(--transition);
+    }
+
+    .grid {
+      max-width: 1600px;
+      margin: 0 auto;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .card {
+      cursor: pointer;
+    }
+
+    figure,
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    figure {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    img {
+      object-fit: cover;
+      background: #333;
+    }
+
+    figcaption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      font-size: 1.5em;
+      line-height: 1.3;
+      text-align: center;
+      padding: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    figcaption span {
+      display: block;
+      font-size: 0.75em;
+    }
+
+    @media (max-width: 899px) {
+      .card {
+        height: var(--half-height);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .grid,
+      .sub-grid {
+        display: grid;
+      }
+
+      .grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+
+      .sub-grid {
+        grid-template-rows: var(--half-height) var(--half-height);
+      }
+
+      .sub-grid-1 {
+        grid-template-columns: 1fr 1fr auto;
+      }
+
+      .sub-grid-1 .card:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .grid > .card {
+        height: var(--height);
+      }
+    }
+
+    @media (hover: hover) and (min-width: 900px) {
+      .notification {
+        display: block;
+      }
+
+      .grid:has(.sub-grid-1 .card:first-of-type:hover) .sub-grid-1 {
+        grid-template-columns: 1fr 0fr auto;
+      }
+
+      .grid:has(.sub-grid-1 .card:nth-of-type(2):hover) .sub-grid-1 {
+        grid-template-columns: 0fr 1fr auto;
+      }
+
+      .grid:has(.sub-grid-1 .card:last-of-type:hover) .sub-grid-1 {
+        grid-template-rows: 0 var(--height);
+      }
+
+      .grid:has(> .card:hover) {
+        grid-template-columns: 0fr 1fr 0fr;
+      }
+
+      .grid:has(.sub-grid-2 .card:first-of-type:hover) .sub-grid-2 {
+        grid-template-rows: var(--height) 0;
+      }
+
+      .grid:has(.sub-grid-2 .card:last-of-type:hover) .sub-grid-2 {
+        grid-template-rows: 0 var(--height);
+      }
+
+      .card {
+        filter: grayscale(1);
+      }
+
+      .card:hover {
+        filter: grayscale(0);
+      }
+
+      .card:hover figcaption {
+        opacity: 1;
+        transition: opacity 0.5s 0.5s;
+      }
+
+      figcaption {
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+    }
+
+    .page-footer {
+      position: fixed;
+      right: 0;
+      bottom: 50px;
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      font-size: 0.9em;
+      background: white;
+    }
+
+    .page-footer a {
+      display: flex;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="sub-grid sub-grid-1">
+      <article class="card">
+        <figure>
+          <img src="https://i.ibb.co/8mbNHty/Whats-App-Image-2024-08-15-at-15-42-26-1.jpg" alt="">
+          <figcaption>
+            <div>Le acque cristalline della Costa Viola invitano al relax e all'avventura<span>Italia</span></div>
+          </figcaption>
+        </figure>
+      </article>
+      <article class="card">
+        <figure>
+          <img src="https://i.ibb.co/p2bvh1f/Whats-App-Image-2024-08-15-at-15-42-26.jpg" alt="">
+          <figcaption>
+            <div>Questo tratto di costa è ricco di storia e tradizioni marinare<span>Italia</span></div>
+          </figcaption>
+        </figure>
+      </article>
+      <article class="card">
+        <figure>
+          <img src="https://i.ibb.co/7V6YQ2z/Whats-App-Image-2024-08-15-at-15-42-27-1.jpg" alt="">
+          <figcaption>
+            <div>I panorami della Costa Viola offrono una vista mozzafiato sullo Stretto di Messina<span>Italia</span></div>
+          </figcaption>
+        </figure>
+      </article>
+    </div>
+    <article class="card">
+      <figure>
+        <img src="https://i.ibb.co/0fyX0SF/Whats-App-Image-2024-08-15-at-15-42-27-2.jpg" alt="">
+        <figcaption>
+          <div>Le scogliere della Costa Viola sono perfette per gli amanti della natura selvaggia<span>Italia</span></div>
+        </figcaption>
+      </figure>
+    </article>
+    <div class="sub-grid sub-grid-2">
+      <article class="card">
+        <figure>
+          <img src="https://i.ibb.co/WzQgBGg/Whats-App-Image-2024-08-15-at-15-42-27-3.jpg" alt="">
+          <figcaption>
+            <div>Qui, le montagne si tuffano direttamente nel mare azzurro<span>Italia</span></div>
+          </figcaption>
+        </figure>
+      </article>
+      <article class="card">
+        <figure>
+          <img src="https://i.ibb.co/ZJbVRTz/Whats-App-Image-2024-08-15-at-15-42-27-4.jpg" alt="">
+          <figcaption>
+            <div>La Costa Viola è un gioiello nascosto della Calabria da esplorare<span>Italia</span></div>
+          </figcaption>
+        </figure>
+      </article>
+    </div>
+  </div>
+  <p class="notification">MUOVI IL MOUSE</p>
+  <footer class="page-footer">
+    <span>made by SCILLA CARIDDI RENTAL BOAT</span>
+    
+  </footer>
+</body>
+</html>
